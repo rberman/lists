@@ -47,7 +47,7 @@ public class MyArrayList<E> {
 	 * @return
 	 */
 	public E get(int index) {
-        return null;    // replace this line with the correct code.
+        return elements[index];
 	}
 	
 	/**
@@ -60,6 +60,12 @@ public class MyArrayList<E> {
 	 * @param elem
 	 */
 	public void add(E elem) {
+        int eLength = size();
+        if (elements.length == eLength) {
+            expandSize();
+        }
+        elements[size()] = elem;
+        currentSize ++;
 	}
 
 	/**
@@ -74,6 +80,22 @@ public class MyArrayList<E> {
 	 * @param elem
 	 */
 	public void add(int index, E elem) {
+        if(elements[index] == null) {
+            elements[index] = elem;
+            currentSize ++;
+            return;
+        }
+
+        int eLength = size();
+        if (elements.length == eLength) {
+            expandSize();
+        }
+
+        for (int i = eLength; i > index; i--) {
+            elements[i] = elements[i - 1];
+        }
+        elements[index] = elem;
+        currentSize ++;
 	}
 	
 	/**
@@ -85,6 +107,12 @@ public class MyArrayList<E> {
      * Hint: use newArrayOfE!
 	 */
 	private void expandSize() {
+        int eLength = elements.length;
+        E [] newElements = newArrayOfE(eLength * 2);
+        for(int i = 0; i < eLength; i++) {
+            newElements[i] = elements [i];
+        }
+        elements = newElements;
 	}
 	
 	/**
@@ -96,6 +124,6 @@ public class MyArrayList<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	private E[] newArrayOfE(int capacity) {
-		return (E[]) (E[])new Object[capacity];
+		return (E[]) new Object[capacity];
 	}
 }
