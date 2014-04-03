@@ -7,34 +7,34 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestList {
-    private MyArrayList<String> list = new MyArrayList<String>();
+    private MyLinkedList<String> list = new MyLinkedList<String>();
 
     @Test
-	public void testGet() {
+    public void testGet() {
         list.clear();
         list.add("foo");
         list.add("bar");
         list.add("baz");
-		assertEquals(list.get(0), "foo");
-		assertEquals(list.get(1), "bar");
-		assertEquals(list.get(2), "baz");
-	}
-	
-	/**
-	 * Tests that appending at the end of a list works.
-	 */
+        assertEquals("foo", list.get(0));
+        assertEquals("bar", list.get(1));
+        assertEquals("baz", list.get(2));
+    }
+
+    /**
+     * Tests that appending at the end of a list works.
+     */
     @Test
-	public void testAdd() {
+    public void testAdd() {
         list.clear();
         list.add("foo");
         list.add("bar");
         list.add("baz");
-		assertEquals(list.size(), 3);
-		assertEquals(list.get(0), "foo");
-		list.add("foobar");
-		assertEquals(list.size(), 4);
-		assertEquals(list.get(3), "foobar");
-	}
+        assertEquals(3, list.size());
+        assertEquals("foo", list.get(0));
+        list.add("foobar");
+        assertEquals(4, list.size());
+        assertEquals("foobar", list.get(3));
+    }
 
     /**
      * Tests that expanding a list works.
@@ -48,26 +48,26 @@ public class TestList {
         for (int i = 0; i < 100; i++) {
             list.add("foo" + i);
         }
-        assertEquals(list.size(), 103);
-        assertEquals(list.get(102), "foo99");
+        assertEquals(103, list.size());
+        assertEquals("foo99", list.get(102));
     }
 
-	/**
-	 * Tests that inserting into the middle of a list works.
-	 */
+    /**
+     * Tests that inserting into the middle of a list works.
+     */
     @Test
-	public void testInsert() {
+    public void testInsert() {
         list.clear();
         list.add("foo");
         list.add("bar");
         list.add("baz");
-		assertEquals(list.size(), 3);
-		assertEquals(list.get(0), "foo");
-		list.add(1, "foobar");
-		assertEquals(list.size(), 4);
-		assertEquals(list.get(1), "foobar");
-		assertEquals(list.get(3), "baz");
-	}
+        assertEquals(3, list.size());
+        assertEquals("foo", list.get(0));
+        list.add(1, "foobar");
+        assertEquals(4, list.size());
+        assertEquals("foobar", list.get(1));
+        assertEquals("baz", list.get(3));
+    }
 
     /**
      * Test that add works in a linked lists.

@@ -29,7 +29,11 @@ public class MyLinkedList<E> {
      * @return
      */
 	public E get(int index) {
-		return null;
+        MyLinkedNode<E> x = head;
+        for(int i = 0; i < index + 1; i ++) {
+            x = x.getNext();
+        }
+		return x.getValue();
 	}
 
     /**
@@ -38,6 +42,13 @@ public class MyLinkedList<E> {
      * @param elem
      */
 	public void add(E elem) {
+
+        MyLinkedNode<E> x = new MyLinkedNode<E>(elem);
+        tail.getPrev().setNext(x);
+        x.setPrev(tail.getPrev());
+        x.setNext(tail);
+        tail.setPrev(x);
+        numElements ++;
 	}
 
     /**
@@ -46,7 +57,17 @@ public class MyLinkedList<E> {
      * @param elem
      */
 	public void add(int i, E elem) {
-	}
+        MyLinkedNode<E> x = head;
+        for (int j = 0; j < i + 1; j++){
+            x = x.getNext();
+        }
+        MyLinkedNode<E> y = new MyLinkedNode<E>(elem);
+        y.setPrev(x.getPrev());
+        y.setNext(x);
+        x.getPrev().setNext(y);
+        x.setPrev(y);
+        numElements ++;
+    }
 
     /**
      * Returns the current size of the list.
